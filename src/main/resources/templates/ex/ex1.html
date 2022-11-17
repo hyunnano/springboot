@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<!-- JSP나 HTML과 동일하게 서버에서 결과물을 생성해서 보내는 방식 -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>[[${list}]]</h3> <!-- 인라인 방식 -->
+    <!--/*  */-->  <!-- 타임리프 주석 -->
+    <hr/>
+    <h3 th:text="${list}"></h3> <!-- 여기서 ${msg}는 jstl이 아닌 thymeleaf 방식 -->
+
+</body>
+</html>
