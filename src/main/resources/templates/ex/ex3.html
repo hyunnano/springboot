@@ -7,8 +7,14 @@
     <title>Title</title>
 </head>
 <body>
+
     <div layout:fragment="content">
         <h1>ex3.html</h1>
     </div>
+
+    <script layout:fragment="script" th:inline="javascript">
+        const arr = [[${arr}]]
+    </script>
+
 </body>
 </html>
