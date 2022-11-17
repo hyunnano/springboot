@@ -9,9 +9,81 @@
 </head>
 <body>
     <h3>[[${list}]]</h3> <!-- 인라인 방식 -->
-    <!--/*  */-->  <!-- 타임리프 주석 -->
+    <!--/* 헤헿 타임리프 주석이지롱, 안보이지롱 */-->  <!-- 타임리프 주석 -->
     <hr/>
+
     <h3 th:text="${list}"></h3> <!-- 여기서 ${msg}는 jstl이 아닌 thymeleaf 방식 -->
+    <hr/>
+
+    <div th:with="num1 = ${10}, num2 = ${20}" >
+        <h3 th:text="${num1+num2}"></h3>
+    </div>
+    <hr/>
+
+    <ul>
+        <li th:each="str: ${list}" th:text="${str}"></li> <!-- 인라인 방식 -->
+    </ul>
+    <ul>
+        <th:block th:each="str: ${list}">
+            <li>[[${str}]]</li>
+        </th:block>
+    </ul>
+    <hr/>
+
+    <!--/* 타임리프 th:each를 처리할때 현재 반복문의 내부상태에 변수를 추가하여 사용할 수 있다. status변수 */-->
+    <ul>
+        <li th:each="str,status:${list}">
+            <!-- --는 연결해준다는 의미, 그냥 적어놓은거, 뭔가 있는건 아님 ㅋㅋ -->
+            [[${status.index}]] <!-- 배열 -->
+            -- [[${str}]] <!-- str값 -->
+            -- [[${status.count}]] <!-- 순서대로 카운트 -->
+            -- [[${status.size}]] <!-- str값 크기 -->
+            -- [[${status.first}]] <!-- 첫번째만 true -->
+            -- [[${status.last}]] <!-- 마지막만 true -->
+            -- [[${status.odd}]] <!-- 짝수만 true -->
+            -- [[${status.even}]] <!-- 홀수만 true -->
+        </li>
+    </ul>
+    <hr/>
+
+    <!--/* th:if, th:unless, th:switch */-->
+    <ul>
+        <li th:each="str,status:${list}">
+            <span th:if="${status.odd}">ODD -- [[${str}]]</span>
+            <span th:if="${status.even}">EVEN -- [[${str}]]</span>
+        </li>
+    </ul>
+    <hr/>
+
+    <!--/* 삼항연산자 */-->
+    <ul>
+        <li th:each="str,status:${list}">
+            <span th:text="${status.odd} ? 'ODD -- '+${str} : 'EVEN -- '+${str}"></span>
+        </li>
+    </ul>
+    <hr/>
+
+    <!--/* th:switch */-->
+    <ul>
+        <li th:each="str,status:${list}">
+            <th:block th:switch="${status.index%3}">
+                <span th:case="0">0출력</span> <!-- 인덱스 나누기 3 해서 값이 0 이면 0 출력 -->
+                <span th:case="1">1출력</span>
+                <span th:case="2">2출력</span>
+            </th:block>
+        </li>
+    </ul>
+    <hr/>
+
+    <!--/* @ 링크 */-->
+    <a th:href="@{/hello}">Go to /hello</a>
+
+    <!--/* @ 링크 + 쿼리스트링(url값) 처리 */-->
+    <a th:href="@{/hello(name='AAA', age='20')}">Go to /hello</a>
+    <a th:href="@{/hello(name='한글', age='20')}">Go to /hello</a> <!-- 타임리프를 사용하면 한글깨짐, 자동으로 인코딩처리해줌 -->
+
+    <!--/* @ 링크 + 배열 처리 */-->
+    <a th:href="@{/hello(types=${{'AAA''BBB''CCC'}}, age=20)}">Go to /hello</a>
 
 </body>
 </html>
