@@ -5,15 +5,18 @@ import net.ict.ict01.domain.Board;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
+@Controller
 @SpringBootTest
 @Log4j2 // 콘솔창에 뿌리기위해서 필요
 public class BoardRepositoryTest {
